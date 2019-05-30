@@ -8,22 +8,22 @@ class Solution(object):
         paraList=[]
         for i in range(len(s)):
             if(s[i]=='{' or s[i]=='(' or s[i]=='['):
-                paraList.insert(0,s[i])
+                paraList.append(s[i])
             if (s[i]=='}' or s[i]==']' or s[i]==')') and len(paraList)==0:
                 return False
             if(s[i]=='}'):
-                if(paraList[0]=='{'):
-                    paraList.pop(0)
+                if(paraList[-1]=='{'):
+                    paraList.pop()
                 else:
                     return False
             elif(s[i]==']'):
-                if(paraList[0]=='['):
-                    paraList.pop(0)
+                if(paraList[-1]=='['):
+                    paraList.pop()
                 else:
                     return False 
             elif(s[i]==')'):
-                if(paraList[0]=='('):
-                    paraList.pop(0)
+                if(paraList[-1]=='('):
+                    paraList.pop()
                 else:
                     return False 
         if(len(paraList)!=0):
