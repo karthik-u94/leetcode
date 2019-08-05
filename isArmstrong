@@ -1,0 +1,9 @@
+class Solution:
+    def isArmstrong(self, N: int) -> bool:
+        curr_sum=0
+        k=len(str(N))
+        for i in str(N):
+            curr_sum+=int(i)**k
+            if curr_sum>N:
+                break
+        return curr_sum==N
