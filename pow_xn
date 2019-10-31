@@ -1,0 +1,14 @@
+class Solution:
+    def myPow(self, x: float, n: int) -> float:
+        def helper(x_,n_):
+            if n_==0:
+                return 1
+            res=helper(x_,n_//2)
+            if n_%2==0:
+                return res*res
+            else:
+                return res*res*x_
+            
+        if n<0:
+            x,n=1/x,-n
+        return helper(x,n)
