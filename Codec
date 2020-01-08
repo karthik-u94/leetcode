@@ -1,0 +1,49 @@
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Codec:
+
+    def serialize(self, root):
+        """Encodes a tree to a single string.
+        
+        :type root: TreeNode
+        :rtype: str
+        """
+        
+        def helper(node, ser):
+            if not node:
+                ser.append("null")
+            else:
+                ser.append(node.val)
+                ser=helper(node.left, ser)
+                ser=helper(node.right, ser)
+            return ser
+        
+        return(helper(root,[]))
+        
+    def deserialize(self, data):
+        """Decodes your encoded data to tree.
+        
+        :type data: str
+        :rtype: TreeNode
+        """
+        
+        def helper(nodes):
+            if nodes[0]=="null":
+                nodes.pop(0)
+                return None
+            node=TreeNode(nodes[0])
+            nodes.pop(0)
+            node.left=helper(nodes)
+            node.right=helper(nodes)
+            return node
+         
+        return helper(data)
+
+# Your Codec object will be instantiated and called as such:
+# codec = Codec()
+# codec.deserialize(codec.serialize(root))
