@@ -1,0 +1,25 @@
+class Solution:
+    def fourSum(self, nums: List[int], target: int) -> List[List[int]]:
+        nums.sort()
+        res=set()
+        # print(nums)
+        for i in range(len(nums)):
+            t1=target-nums[i]
+            # print(nums[i],t)
+            for j in range(i+1,len(nums)):
+                t2=t1-nums[j]
+                begin,end=j+1,len(nums)-1
+                while(begin<end):
+                    sum=nums[begin]+nums[end]
+                    if(sum<t2):
+                        begin+=1
+                    elif(sum>t2):
+                        end-=1
+                    else:
+                        # print(t,nums[j],nums[begin],nums[end])
+                        res.add((nums[i],nums[j],nums[begin],nums[end]))
+                        begin+=1
+                        end-=1
+        return([list(x) for x in res])
+        
+        
