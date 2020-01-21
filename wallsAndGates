@@ -1,0 +1,33 @@
+class Solution:
+    def wallsAndGates(self, rooms: List[List[int]]) -> None:
+        """
+        Do not return anything, modify rooms in-place instead.
+        """
+        queue=[]
+        R=len(rooms)
+        if R==0:
+            return
+        C=len(rooms[0])
+        if C==0:
+            return
+        INF = 2147483647
+        
+        dirs=[[1,0],[0,1],[-1,0],[0,-1]]
+        for i in range(R):
+            for j in range(C):
+                if rooms[i][j]==0:
+                    queue.append([i,j,0])
+        # print(queue)           
+        while queue:
+            # print(queue)
+            curr=queue.pop(0)
+            i=curr[0]
+            j=curr[1]
+            for dir in dirs:
+                ni=i+dir[0]
+                nj=j+dir[1]
+                if 0<=ni<R and 0<=nj<C:
+                    if rooms[ni][nj]==INF:
+                        rooms[ni][nj]=curr[2]+1
+                        queue.append([ni,nj,curr[2]+1])
+                        # print(queue)
